@@ -25,3 +25,4 @@ yarn-error.log*
 
 # React APP
 src/frontend/node_modules
+src/frontend/package-lock.json

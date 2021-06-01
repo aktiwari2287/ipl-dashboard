@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from 'react'
 import { useParams } from 'react-router';
-import { MatchDetailCard } from './MatchDetailCard'
-import { MatchSmallCard } from './MatchSmallCard'
+import { MatchDetailCard } from './MatchDetailCard';
+import { MatchSmallCard } from './MatchSmallCard';
 export const TeamPage = () => {
 
   const [team, setTeam] = useState({matches: []});
