@@ -2,6 +2,7 @@ import './App.scss';
 import { TeamPage } from './pages/TeamPage';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import { MatchPage } from './pages/MatchPage';
+import {HomePage} from './pages/HomePage';
 
 function App() {
   return (
@@ -15,7 +16,9 @@ function App() {
             <Route path="/teams/:teamName">
               <TeamPage></TeamPage>
             </Route>
-            
+            <Route path="/teams">
+              <HomePage></HomePage>
+            </Route>
           </Switch>
        </Router>
     </div>
