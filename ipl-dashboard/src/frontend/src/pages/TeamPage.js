@@ -2,10 +2,13 @@ import { React, useEffect, useState } from 'react'
 import { useParams } from 'react-router';
 import { MatchDetailCard } from './MatchDetailCard';
 import { MatchSmallCard } from './MatchSmallCard';
+import { PieChart } from 'react-minimal-pie-chart';
+import './TeamPage.scss';
 export const TeamPage = () => {
 
   const [team, setTeam] = useState({matches: []});
   const { teamName } = useParams();
+
   useEffect(
       () => {
        const fetchTeam = async () => {
@@ -16,21 +19,37 @@ export const TeamPage = () => {
        fetchTeam();
       },[teamName]
   );
-
+  
   if (!team || !team.teamName) {
       return <h1>Team not found</h1>
   }
 
     return (
       <div className="TeamPage">
-          <h1>{team.teamName} </h1>
-          <MatchDetailCard teamName={team.teamName} match={team.matches[0]}></MatchDetailCard>
-          { 
-            team.matches.slice(1).map(match => {
-              console.log(match);
-             return <MatchSmallCard teamName={team.teamName} match={match}></MatchSmallCard>
-            })
-          }
+          <div className="team-name-section">
+            <h1 className="team-name">{team.teamName} </h1> 
+          </div>
+          <div  className="win-loss-section"> 
+            Wins / Losses 
+            <PieChart
+                data={[
+                  { title: 'Losses', value: team.totalMatches-team.totalWins, color: '#a34d5d' },
+                  { title: 'Wins', value: team.totalWins, color: '#4da375' }
+                ]}
+              />
+          </div>
+          <div className="match-detail-section">
+            <h3 >Latest Matches</h3>
+            <MatchDetailCard teamName={team.teamName} match={team.matches[0]}></MatchDetailCard>
+          </div>
+            { 
+              team.matches.slice(1).map(match => {
+              return <MatchSmallCard teamName={team.teamName} match={match}></MatchSmallCard>
+              })
+            }
+            <div className="more-link">
+                <a href="#"> More > </a>
+            </div>
       </div>
     );
   }
